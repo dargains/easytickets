@@ -1,33 +1,15 @@
+import { fetchWrapper } from "@/helpers/fetch";
+import { Festival } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-export type Festival = {
-  id: number;
-  status: "draft" | "published" | "archived";
-  sort: null;
-  date_created: string;
-  date_updated: string;
-  name: string;
-  date: string;
-  location: string;
-  image: string;
-};
-
 async function getData() {
-  const res = await fetch(
-    "https://directus-production-1635.up.railway.app/items/festivals"
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+  return await fetchWrapper('/items/festivals')
 }
 
 const FestivalDetails = async () => {
-  const { data } = await getData();
-  console.log(data);
+  const data = await getData();
+
   return (
     <div>
       <h1>Festivais</h1>

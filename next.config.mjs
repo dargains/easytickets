@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "directus-production-1635.up.railway.app",
+        hostname: "easytickets-cms.up.railway.app",
         port: "",
         pathname: "/assets/**",
       },
