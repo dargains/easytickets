@@ -1,7 +1,8 @@
-import styles from "./page.module.css";
 import Link from "next/link";
-import { Festival, HomepageTranslations } from "@/types";
+import { Festival, HomepageTranslations, itemStatus } from "@/types";
 import { fetchWrapper } from "@/helpers/fetch";
+import styles from "./page.module.css";
+import './reset.css'
 
 const languages_code = "pt-PT";
 
@@ -12,7 +13,9 @@ async function getCopy() {
 }
 
 async function getFestivals() {
-  return await fetchWrapper('/items/festivals');
+  const result = await fetchWrapper('/items/festivals');
+  console.log(result)
+  return result.filter((item: Festival) => item.status === itemStatus.published);
 }
 
 export default async function Home() {
@@ -28,7 +31,7 @@ export default async function Home() {
           <div key={festival.id} className={styles.festivalItem}>
             <h3>{festival.name}</h3>
             <p>{festival.date}</p>
-            <Link href="/festival-details">Detalhes do Festival</Link>
+            <Link href={`/festival-details/${festival.id}`}>Detalhes do Festival</Link>
           </div>
         ))}
       </section>

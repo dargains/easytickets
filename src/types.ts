@@ -1,7 +1,14 @@
+export const itemStatus = {
+  draft: "draft",
+  published: "published",
+  archived: "archived",
+}
+
+export type Status = "draft" | "published" | "archived";
 
 export type Festival = {
   id: number;
-  status: "draft" | "published" | "archived";
+  status: Status;
   sort: null;
   date_created: string;
   date_updated: string;
