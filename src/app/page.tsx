@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Festival, HomepageTranslations, itemStatus } from "@/types";
-import { fetchWrapper } from "@/helpers/cmsrequest";
+import { apiUrl, fetchWrapper } from "@/helpers/cmsrequest";
 import styles from "./page.module.css";
 
 const languages_code = "pt-PT";
@@ -12,8 +12,9 @@ async function getCopy() {
 }
 
 async function getFestivals() {
-  const result = await fetchWrapper('/items/festivals');
-  return result.filter((item: Festival) => item.status === itemStatus.published);
+  const response = await fetch(apiUrl + '/api/festivals');
+  const { data } = await response.json();
+  return data.filter((item: Festival) => item.status === itemStatus.published);
 }
 
 export default async function Home() {

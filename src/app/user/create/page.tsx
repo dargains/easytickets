@@ -9,7 +9,6 @@ const initialUserState: User = {
   last_name: 'aaa',
   email: 'another3@example.com',
   password: 'd1r3ctu5',
-  avatar: undefined,
   role: 'b110cd8b-96ad-40c9-a828-76a31c97772b',
 }
 

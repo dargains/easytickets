@@ -1,32 +1,42 @@
-import { fetchWrapper } from "@/helpers/cmsrequest";
+import { apiUrl, cmsUrl, fetchWrapper } from "@/helpers/cmsrequest";
 import { Festival } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-async function getData(festivalId: string) {
-  const response = await fetch('/api/festivals/' + festivalId)
-  return await response.json()
+const getData = async (festivalId: string) => {
+  const response = await fetchWrapper(`/items/festivals/${festivalId}`);
+  return response
 }
 
-const FestivalDetails = async ({ params }: { params: { festivalId: string } }) => {
-  const festival: Festival = await getData(params.festivalId);
+async function fetchFestivalDetails(id: string) {
+  const response = await fetch(`${apiUrl}/api/festivals/${id}`);
+  const { data } = await response.json();
+  return data;
+}
+
+const FestivalDetails = async ({ params: { festivalId } }: { params: { festivalId: string } }) => {
+  console.log(festivalId)
+  const festival = await getData(festivalId);
+  // const festival2 = await fetchFestivalDetails(festivalId);
 
   return (
     <section>
-      <h1>Detalhes do Festival</h1>
+      <h1>Festival Details</h1>
+      <p>{festivalId}</p>
       <div>
         <h2>{festival.name}</h2>
         <p>{festival.date}</p>
         <p>{festival.location}</p>
         <Image
-          src={`${process.env.CMS_ENDPOINT}/assets/${festival.image}`}
+          src={`${cmsUrl}/assets/${festival.image}`}
           alt={festival.name}
           width={300}
           height={200}
         />
+        {/* <p>{festival2.name}</p> */}
       </div>
-      <Link href="/">voltar</Link>
+      <Link href="/">Back</Link>
     </section>
   );
 };

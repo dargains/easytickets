@@ -1,15 +1,17 @@
-const cache = process.env.NODE_ENV === 'development' ? 'no-store' : 'default'
-const cmsUrl = "https://easytickets-cms.up.railway.app";
+export const isDevelopment = process.env.NODE_ENV === 'development';
+export const cache = isDevelopment ? 'no-store' : 'default'
+export const cmsUrl = 'https://easytickets-cms.up.railway.app';
+export const apiUrl = process.env.URL || process.env.NEXT_PUBLIC_URL;
 
 export async function fetchWrapper(url: string) {
-  const res = await fetch(process.env.CMS_ENDPOINT + url, { cache });
+  const res = await fetch(cmsUrl + url, { cache });
   const { data } = await res.json();
 
   return data;
 }
 
 export async function postWrapper(url: string, params: any) {
-  const res = await fetch((process.env.CMS_ENDPOINT || cmsUrl) + url, {
+  const res = await fetch(cmsUrl + url, {
     ...params,
     cache
   })

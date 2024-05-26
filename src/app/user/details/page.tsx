@@ -1,9 +1,11 @@
-import { fetchWrapper } from '@/helpers/cmsrequest';
+import { apiUrl } from '@/helpers/cmsrequest';
 import { User } from '@/types';
 import React from 'react'
 
 async function getData(userId: string) {
-  return await fetchWrapper('/users/' + userId)
+  const response = await fetch(apiUrl + '/api/users/' + userId);
+  const { data } = await response.json();
+  return data
 }
 
 const UserDetails = async () => {

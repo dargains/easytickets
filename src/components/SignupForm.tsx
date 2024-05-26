@@ -35,10 +35,6 @@ const SignupForm = ({ initialUserState, onSubmit }: Props) => {
         <label htmlFor="password">password</label>
         <input type="password" id='password' name='password' value={formData.password} onChange={onChange} />
       </div>
-      <div>
-        <label htmlFor="avatar">avatar</label>
-        <input type="file" id='avatar' name='avatar' value={formData.avatar} onChange={onChange} />
-      </div>
       <button onClick={handleSubmit}>registar</button>
       {formData.first_name} {formData.last_name} {formData.email} {formData.password}
     </div>
