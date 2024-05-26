@@ -1,15 +1,15 @@
-import { fetchWrapper } from "@/helpers/fetch";
+import { fetchWrapper } from "@/helpers/cmsrequest";
 import { Festival } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 async function getData(festivalId: string) {
-  return await fetchWrapper('/items/festivals/' + festivalId)
+  const response = await fetch('/api/festivals/' + festivalId)
+  return await response.json()
 }
 
 const FestivalDetails = async ({ params }: { params: { festivalId: string } }) => {
-  console.log(params)
   const festival: Festival = await getData(params.festivalId);
 
   return (

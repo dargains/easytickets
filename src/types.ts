@@ -6,6 +6,15 @@ export const itemStatus = {
 
 export type Status = "draft" | "published" | "archived";
 
+export type User = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  avatar?: string;
+  role: 'b110cd8b-96ad-40c9-a828-76a31c97772b';
+}
+
 export type Festival = {
   id: number;
   status: Status;

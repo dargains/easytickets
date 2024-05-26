@@ -1,3 +1,204 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports",
+    "snakecasejs",
+    "no-snapshot-testing"
+  ],
+  "settings": {
+    "import/ignore": [
+      "react-native"
+    ],
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx"
+      ]
+    },
+    "import/resolver": {
+      "babel-module": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".d.ts"
+        ]
+      }
+    },
+    "snakecasejs/filter": [
+      "ClassDeclaration",
+      "NewExpression"
+    ],
+    "snakecasejs/whitelist": [
+      "externalPath",
+      "setNumber"
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allowCircularSelfDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nx/typescript",
+        "plugin:@nx/javascript",
+        "plugin:import/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "error",
+        "import/newline-after-import": "error",
+        "import/no-extraneous-dependencies": "error",
+        "lodash/import-scope": [
+          "error",
+          "full"
+        ],
+        "max-params": [
+          "error",
+          3
+        ],
+        "object-shorthand": "error",
+        "react/jsx-props-no-spreading": [
+          "error",
+          {
+            "explicitSpread": "ignore"
+          }
+        ],
+        "react/no-unused-prop-types": "error",
+        "react-hooks/exhaustive-deps": "off",
+        "react-native/no-inline-styles": "error",
+        "react-native/no-unused-styles": "error",
+        "import/order": [
+          "error",
+          {
+            "newlines-between": "always",
+            "groups": [
+              "builtin",
+              "external",
+              "index",
+              "parent",
+              "sibling"
+            ],
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            },
+            "pathGroups": [
+              {
+                "pattern": "react*",
+                "group": "builtin"
+              },
+            ],
+            "pathGroupsExcludedImportTypes": []
+          }
+        ],
+        "padding-line-between-statements": [
+          "error",
+          {
+            "blankLine": "always",
+            "prev": "function",
+            "next": "*"
+          },
+          {
+            "blankLine": "always",
+            "prev": "expression",
+            "next": "*"
+          },
+          {
+            "blankLine": "always",
+            "prev": [
+              "const",
+              "let",
+              "var"
+            ],
+            "next": "*"
+          },
+          {
+            "blankLine": "any",
+            "prev": [
+              "const",
+              "let",
+              "var"
+            ],
+            "next": [
+              "const",
+              "let",
+              "var"
+            ]
+          },
+          {
+            "blankLine": "always",
+            "prev": [
+              "case",
+              "default"
+            ],
+            "next": "*"
+          }
+        ],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "off"
+      }
+    },
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.d.ts"
+      ],
+      "rules": {
+        "import/no-unresolved": "off"
+      }
+    },
+    {
+      "files": [
+        "*.spec.*",
+        "*.test.*"
+      ],
+      "rules": {
+        "react/jsx-props-no-spreading": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "no-snapshot-testing/no-snapshot-testing": "error"
+      }
+    },
+    {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
+      "rules": {}
+    }
+  ]
 }

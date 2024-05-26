@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Festival, HomepageTranslations, itemStatus } from "@/types";
-import { fetchWrapper } from "@/helpers/fetch";
+import { fetchWrapper } from "@/helpers/cmsrequest";
 import styles from "./page.module.css";
-import './reset.css'
 
 const languages_code = "pt-PT";
 
@@ -14,7 +13,6 @@ async function getCopy() {
 
 async function getFestivals() {
   const result = await fetchWrapper('/items/festivals');
-  console.log(result)
   return result.filter((item: Festival) => item.status === itemStatus.published);
 }
 
@@ -32,9 +30,15 @@ export default async function Home() {
             <h3>{festival.name}</h3>
             <p>{festival.date}</p>
             <Link href={`/festival-details/${festival.id}`}>Detalhes do Festival</Link>
+            <button>Eu bou, crl!</button>
           </div>
         ))}
       </section>
+      <div>
+
+        <Link href="/user/create">registo</Link>
+        <Link href="/user/details">detalhes</Link>
+      </div>
     </main>
   );
 }
