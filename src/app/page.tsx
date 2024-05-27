@@ -42,6 +42,7 @@ export default async function Home() {
       <div>
         <Link href="/user/create">registo</Link>
         <Link href="/user/details">detalhes</Link>
+        <Link href="/user/login">login</Link>
       </div>
     </main>
   );

@@ -1,18 +1,9 @@
 import { cmsUrl } from "@/helpers/cmsrequest";
 import { NextResponse } from "next/server";
 
-const GET = async (req: Request) => {
-  const token = req.url.split("?")[1].split("=")[1];
-  const response = await fetch(`${cmsUrl}/users/me`, {
-    headers: { Authorization: `Bearer ${token}`, cache: "no-store" },
-  });
-  const parsedData = await response.json();
-  return NextResponse.json(parsedData);
-};
-
 const POST = async (req: any) => {
   const body = await req.json();
-  const response = await fetch(`${cmsUrl}/users`, {
+  const response = await fetch(`${cmsUrl}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,4 +20,4 @@ const POST = async (req: any) => {
   return NextResponse.json(parsedData, resultObject);
 };
 
-export { GET, POST };
+export { POST };
