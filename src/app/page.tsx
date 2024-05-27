@@ -3,6 +3,7 @@ import { Festival, HomepageTranslations } from "@/types";
 import { fetchWrapper } from "@/helpers/cmsrequest";
 import { apiUrl } from "@/helpers/functions";
 import styles from "./page.module.css";
+import FestivalItem from "@/components/FestivalItem/FestivalItem";
 
 const languages_code = "pt-PT";
 
@@ -30,14 +31,7 @@ export default async function Home() {
       <h2>{copy.subtitle}</h2>
       <section>
         {festivals.map((festival: Festival) => (
-          <div key={festival.id} className={styles.festivalItem}>
-            <h3>{festival.name}</h3>
-            <p>{festival.date}</p>
-            <Link href={`/festival-details/${festival.id}`}>
-              Detalhes do Festival
-            </Link>
-            <button>Eu bou, crl!</button>
-          </div>
+          <FestivalItem key={festival.id} {...festival} />
         ))}
       </section>
       <div>
