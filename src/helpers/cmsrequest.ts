@@ -6,7 +6,6 @@ export const apiUrl = process.env.URL || process.env.NEXT_PUBLIC_URL;
 export async function fetchWrapper(url: string) {
   const res = await fetch(cmsUrl + url, { cache });
   const { data } = await res.json();
-
   return data;
 }
 

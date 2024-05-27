@@ -1,5 +1,5 @@
 import { apiUrl, cmsUrl, fetchWrapper } from "@/helpers/cmsrequest";
-import { Festival } from "@/types";
+import { Festival, User } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -15,9 +15,22 @@ async function fetchFestivalDetails(id: string) {
   return data;
 }
 
+const getGoers = async (goerIds: string[]) => {
+  if (goerIds?.length === 0) return [];
+  const result: User[] = goerIds.map(async (goer) => {
+    const { directus_users_id } = await fetchWrapper(`/items/festivals_directus_users/${goer}`)
+    const response = await fetch(`${apiUrl}/api/users/${directus_users_id}`);
+    const { data } = await response.json();
+    console.log('data', data)
+    result.push(data)
+  })
+  console.log('goers', result)
+  return result;
+}
+
 const FestivalDetails = async ({ params: { festivalId } }: { params: { festivalId: string } }) => {
-  console.log(festivalId)
   const festival = await getData(festivalId);
+  const goers = await getGoers(festival.goers);
   // const festival2 = await fetchFestivalDetails(festivalId);
 
   return (
@@ -34,6 +47,10 @@ const FestivalDetails = async ({ params: { festivalId } }: { params: { festivalI
           width={300}
           height={200}
         />
+        <p>goers</p>
+        {
+          goers.map(goer => <p>{goer.first_name}</p>)
+        }
         {/* <p>{festival2.name}</p> */}
       </div>
       <Link href="/">Back</Link>
