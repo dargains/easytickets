@@ -2,18 +2,19 @@ export const itemStatus = {
   draft: "draft",
   published: "published",
   archived: "archived",
-}
+};
 
 export type Status = "draft" | "published" | "archived";
 
 export type User = {
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
   password: string;
   avatar?: string;
-  role: 'b110cd8b-96ad-40c9-a828-76a31c97772b';
-}
+  role: "b110cd8b-96ad-40c9-a828-76a31c97772b";
+};
 
 export type Festival = {
   id: number;
@@ -24,7 +25,16 @@ export type Festival = {
   name: string;
   date: string;
   location: string;
-  image: string;
+  image: {
+    id: string;
+  };
+  goers: Goer[];
+};
+
+export type Goer = {
+  id: number;
+  festivals_id: number;
+  directus_users_id: string;
 };
 
 export type HomepageTranslations = {
@@ -33,4 +43,4 @@ export type HomepageTranslations = {
   languages_code: string;
   title: string;
   subtitle: string;
-}
+};

@@ -8,13 +8,15 @@ const languages_code = "pt-PT";
 async function getCopy() {
   const data = await fetchWrapper("/items/homepage_translations");
 
-  return data.find((d: HomepageTranslations) => d.languages_code === languages_code);
+  return data.find(
+    (d: HomepageTranslations) => d.languages_code === languages_code
+  );
 }
 
 async function getFestivals() {
-  const response = await fetch(apiUrl + '/api/festivals');
+  const response = await fetch(apiUrl + "/api/festivals?filter");
   const { data } = await response.json();
-  return data.filter((item: Festival) => item.status === itemStatus.published);
+  return data;
 }
 
 export default async function Home() {
@@ -30,13 +32,14 @@ export default async function Home() {
           <div key={festival.id} className={styles.festivalItem}>
             <h3>{festival.name}</h3>
             <p>{festival.date}</p>
-            <Link href={`/festival-details/${festival.id}`}>Detalhes do Festival</Link>
+            <Link href={`/festival-details/${festival.id}`}>
+              Detalhes do Festival
+            </Link>
             <button>Eu bou, crl!</button>
           </div>
         ))}
       </section>
       <div>
-
         <Link href="/user/create">registo</Link>
         <Link href="/user/details">detalhes</Link>
       </div>
