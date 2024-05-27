@@ -34,11 +34,17 @@ export default async function Home() {
           <FestivalItem key={festival.id} {...festival} />
         ))}
       </section>
-      <div>
-        <Link href="/user/create">registo</Link>
-        <Link href="/user/details">detalhes</Link>
-        <Link href="/user/login">login</Link>
-      </div>
+      <ul>
+        <li>
+          <Link href="/user/create">registo</Link>
+        </li>
+        <li>
+          <Link href="/user/details">detalhes</Link>
+        </li>
+        <li>
+          <Link href="/user/login">login</Link>
+        </li>
+      </ul>
     </main>
   );
 }
