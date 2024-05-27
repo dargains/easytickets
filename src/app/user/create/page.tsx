@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import SignupForm from "@/components/SignupForm";
 import { User } from "@/types";

@@ -1,4 +1,4 @@
-import { cache, cmsUrl } from "@/helpers/cmsrequest";
+import { cache, cmsUrl } from "@/helpers/functions";
 import { NextResponse } from "next/server";
 
 const GET = async () => {

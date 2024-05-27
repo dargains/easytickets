@@ -1,4 +1,4 @@
-import { cmsUrl } from "@/helpers/cmsrequest";
+import { cmsUrl } from "@/helpers/functions";
 import { NextResponse } from "next/server";
 
 const GET = async (request: Request, context: any) => {
@@ -6,6 +6,6 @@ const GET = async (request: Request, context: any) => {
   const response = await fetch(`${cmsUrl}/users/${params.userId}`);
   const parsedData = await response.json();
   return NextResponse.json(parsedData);
-}
+};
 
 export { GET };

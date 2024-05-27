@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { useAppContext } from "@/context";
-import { apiUrl, cmsUrl } from "@/helpers/cmsrequest";
-import { User } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { useAppContext } from "@/context";
+import { apiUrl, cmsUrl } from "@/helpers/functions";
+import { User } from "@/types";
 
 const UserDetails = () => {
   const router = useRouter();
@@ -50,13 +50,12 @@ const UserDetails = () => {
     <div>
       {user ? (
         <div>
-          <p>{JSON.stringify(user, null, 6)}</p>
           <p>{user.first_name}</p>
           <p>{user.last_name}</p>
           <Image
             src={`${cmsUrl}/assets/${user.avatar}`}
-            alt={user.first_name}
-            width={300}
+            alt={user.first_name || "avatar"}
+            width={200}
             height={200}
           />
           <button onClick={onLogout}>Logout</button>

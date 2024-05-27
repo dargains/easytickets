@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Festival, HomepageTranslations, itemStatus } from "@/types";
-import { apiUrl, fetchWrapper } from "@/helpers/cmsrequest";
+import { Festival, HomepageTranslations } from "@/types";
+import { fetchWrapper } from "@/helpers/cmsrequest";
+import { apiUrl } from "@/helpers/functions";
 import styles from "./page.module.css";
 
 const languages_code = "pt-PT";

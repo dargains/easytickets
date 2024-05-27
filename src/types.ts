@@ -34,7 +34,7 @@ export type Festival = {
 export type Goer = {
   id: number;
   festivals_id: number;
-  directus_users_id: string;
+  directus_users_id: User;
 };
 
 export type HomepageTranslations = {
