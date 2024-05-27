@@ -6,29 +6,39 @@ import { useAppContext } from "@/context";
 import { apiUrl, cmsUrl } from "@/helpers/cmsrequest";
 import { User } from "@/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const UserDetails = () => {
+  const router = useRouter();
   const { token, setToken } = useAppContext();
   const [user, setUser] = useState<User | undefined>(undefined);
 
-  async function fetchUser(token: string) {
+  const fetchUser = async (token: string) => {
     const url = `${apiUrl}/api/users?token=${token}`;
     const response = await fetch(url);
     const { data } = await response.json();
     return data;
-  }
+  };
+
+  const onLogout = () => {
+    router.push("/");
+    Cookies.remove("token");
+    setToken(undefined);
+  };
 
   useEffect(() => {
     if (!token) {
       const newToken = Cookies.get("token");
-      console.log("usou o cookie", newToken);
-      setToken(newToken);
+      if (!newToken) {
+        router.push("/user/login");
+      } else {
+        setToken(JSON.parse(newToken));
+      }
     }
   }, []);
 
   useEffect(() => {
     if (!token) return;
-    console.log("fetching user", token);
     fetchUser(token.access_token).then((data) => {
       console.log(user);
       setUser(data);
@@ -38,7 +48,6 @@ const UserDetails = () => {
 
   return (
     <div>
-      <p>{token}</p>
       {user ? (
         <div>
           <p>{JSON.stringify(user, null, 6)}</p>
@@ -50,6 +59,7 @@ const UserDetails = () => {
             width={300}
             height={200}
           />
+          <button onClick={onLogout}>Logout</button>
         </div>
       ) : (
         <div>a carregar...</div>
