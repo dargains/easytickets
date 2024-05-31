@@ -1,10 +1,10 @@
-import { cmsUrl } from "@/helpers/functions";
+import { cache, cmsUrl } from "@/helpers/functions";
 import { NextResponse } from "next/server";
 
 const GET = async (req: Request) => {
   const token = req.url.split("?")[1].split("=")[1];
   const response = await fetch(`${cmsUrl}/users/me`, {
-    headers: { Authorization: `Bearer ${token}`, cache: "no-cache" },
+    headers: { Authorization: `Bearer ${token}`, cache },
   });
   const parsedData = await response.json();
   return NextResponse.json(parsedData);
