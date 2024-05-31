@@ -6,14 +6,14 @@ import Cookies from "js-cookie";
 import { User } from "@/types";
 import { useAppContext } from "@/context";
 import LoginForm from "@/components/LoginForm";
-import { loginUser } from "@/app/libs/User";
+import { loginUser } from "@/libs/User";
 
 const initialUserState: User = {
   email: "another3@example.com",
   password: "d1r3ctu5",
 };
 
-const LoginUser = () => {
+const UserLoginPage = () => {
   const router = useRouter();
   const { token, setToken } = useAppContext();
 
@@ -45,4 +45,4 @@ const LoginUser = () => {
   );
 };
 
-export default LoginUser;
+export default UserLoginPage;

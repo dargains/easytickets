@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getGoerDetails } from "@/app/libs/Goer";
+import { getGoerDetails } from "@/libs/Goer";
 import { cmsUrl } from "@/helpers/functions";
 import { User } from "@/types";
 
-const GoerDetails = async ({
+const GoerDetailsPage = async ({
   params: { userId },
 }: {
   params: { userId: string };
@@ -33,4 +33,4 @@ const GoerDetails = async ({
   );
 };
 
-export default GoerDetails;
+export default GoerDetailsPage;

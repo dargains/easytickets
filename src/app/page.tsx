@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getFestivals } from "./libs/Festival";
+import { getFestivals } from "../libs/Festival";
 import { Festival, HomepageTranslations } from "@/types";
 import FestivalItem from "@/components/FestivalItem/FestivalItem";
 import { fetchWrapper } from "@/helpers/cmsrequest";

@@ -6,10 +6,10 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useAppContext } from "@/context";
 import { User } from "@/types";
-import { getMe } from "@/app/libs/User";
+import { getMe } from "@/libs/User";
 import UserDetails from "@/components/UserDetails/UserDetails";
 
-const DetailsUser = () => {
+const UserDetailsPage = () => {
   const router = useRouter();
   const { token, setToken } = useAppContext();
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -51,4 +51,4 @@ const DetailsUser = () => {
   );
 };
 
-export default DetailsUser;
+export default UserDetailsPage;

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import SignupForm from "@/components/SignupForm";
 import { User } from "@/types";
-import { createUser } from "@/app/libs/User";
+import { createUser } from "@/libs/User";
 
 const initialUserState: User = {
   first_name: "",
@@ -13,7 +13,7 @@ const initialUserState: User = {
   role: "b110cd8b-96ad-40c9-a828-76a31c97772b",
 };
 
-const UserCreate = () => {
+const UserCreatePage = () => {
   const [hasError, setHasError] = useState(false);
 
   const onSubmit = async (userInfo: User) => {
@@ -37,4 +37,4 @@ const UserCreate = () => {
   );
 };
 
-export default UserCreate;
+export default UserCreatePage;
