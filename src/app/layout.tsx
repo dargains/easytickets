@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppWrapper>
           <Header />
-          <main>{children}</main>
+          <main style={{ padding: "20px" }}>{children}</main>
         </AppWrapper>
       </body>
     </html>

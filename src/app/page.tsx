@@ -9,7 +9,7 @@ export default async function Home() {
   const festivals: Festival[] = await getFestivals();
 
   return (
-    <main className={styles.main}>
+    <>
       <h1>{copy.title}</h1>
       <h2>{copy.subtitle}</h2>
       <section>
@@ -17,6 +17,6 @@ export default async function Home() {
           <FestivalItem key={festival.id} {...festival} />
         ))}
       </section>
-    </main>
+    </>
   );
 }
