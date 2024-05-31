@@ -6,22 +6,11 @@ import Cookies from "js-cookie";
 import { User } from "@/types";
 import { useAppContext } from "@/context";
 import LoginForm from "@/components/LoginForm";
+import { loginUser } from "@/app/libs/User";
 
 const initialUserState: User = {
   email: "another3@example.com",
   password: "d1r3ctu5",
-};
-
-const loginUser = async (params: User) => {
-  const response = await fetch(`/api/auth`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(params),
-  });
-  const { data } = await response.json();
-  return data;
 };
 
 const LoginUser = () => {

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import SignupForm from "@/components/SignupForm";
 import { User } from "@/types";
+import { createUser } from "@/app/libs/User";
 
 const initialUserState: User = {
   first_name: "",
@@ -12,18 +13,9 @@ const initialUserState: User = {
   role: "b110cd8b-96ad-40c9-a828-76a31c97772b",
 };
 
-const createUser = async (params: User) => {
-  return await fetch(`/api/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(params),
-  });
-};
-
-const CreateUser = () => {
+const UserCreate = () => {
   const [hasError, setHasError] = useState(false);
+
   const onSubmit = async (userInfo: User) => {
     setHasError(false);
     const response = await createUser(userInfo);
@@ -45,4 +37,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default UserCreate;

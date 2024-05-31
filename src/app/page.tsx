@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { getFestivals } from "./libs/Festival";
 import { Festival, HomepageTranslations } from "@/types";
-import { fetchWrapper } from "@/helpers/cmsrequest";
-import { apiUrl } from "@/helpers/functions";
-import styles from "./page.module.css";
 import FestivalItem from "@/components/FestivalItem/FestivalItem";
+import { fetchWrapper } from "@/helpers/cmsrequest";
+import styles from "./page.module.css";
 
 const languages_code = "pt-PT";
 
@@ -13,12 +13,6 @@ async function getCopy() {
   return data.find(
     (d: HomepageTranslations) => d.languages_code === languages_code
   );
-}
-
-async function getFestivals() {
-  const response = await fetch(apiUrl + "/api/festivals?filter");
-  const { data } = await response.json();
-  return data;
 }
 
 export default async function Home() {

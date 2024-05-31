@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 const GET = async (req: Request) => {
   const token = req.url.split("?")[1].split("=")[1];
   const response = await fetch(`${cmsUrl}/users/me`, {
-    headers: { Authorization: `Bearer ${token}`, cache: "no-store" },
+    headers: { Authorization: `Bearer ${token}`, cache: "no-cache" },
   });
   const parsedData = await response.json();
   return NextResponse.json(parsedData);

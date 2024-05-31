@@ -7,7 +7,13 @@ const GET = async (request: Request, context: any) => {
     `${cmsUrl}/items/festivals/${params.festivalId}?fields=*,goers.directus_users_id.first_name,goers.directus_users_id.last_name,goers.directus_users_id.id`,
     { headers: { cache: cache } }
   );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
   const parsedData = await response.json();
+
   return NextResponse.json(parsedData);
 };
 

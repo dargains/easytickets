@@ -1,21 +1,16 @@
-import { apiUrl, cmsUrl } from "@/helpers/functions";
-import { User } from "@/types";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-
-async function fetchGoerDetails(id: string) {
-  const response = await fetch(`${apiUrl}/api/users/${id}`);
-  const { data } = await response.json();
-  return data;
-}
+import { getGoerDetails } from "@/app/libs/Goer";
+import { cmsUrl } from "@/helpers/functions";
+import { User } from "@/types";
 
 const GoerDetails = async ({
   params: { userId },
 }: {
   params: { userId: string };
 }) => {
-  const goer: User = await fetchGoerDetails(userId);
+  const goer: User = await getGoerDetails(userId);
 
   return (
     <section>
@@ -23,12 +18,15 @@ const GoerDetails = async ({
       <div>
         <p>{goer.first_name}</p>
         <p>{goer.last_name}</p>
-        <Image
-          src={`${cmsUrl}/assets/${goer.avatar}`}
-          alt={goer.first_name || "avatar"}
-          width={200}
-          height={200}
-        />
+        {
+          goer.avatar ?
+            <Image
+              src={`${cmsUrl}/assets/${goer.avatar}`}
+              alt={goer.first_name || "avatar"}
+              width={200}
+              height={200}
+            />
+            : ''}
       </div>
       <Link href="/">Back</Link>
     </section>
