@@ -1,5 +1,6 @@
 import { cmsUrl } from "@/helpers/functions";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 const POST = async (req: any) => {
   const body = await req.json();
@@ -11,14 +12,17 @@ const POST = async (req: any) => {
     body: JSON.stringify(body),
   });
   const parsedData = await response.json();
+  cookies().set("token", JSON.stringify(parsedData.data), {
+    maxAge: parsedData.data.expires,
+    secure: true,
+  });
   const resultObject = {
     headers: {
       "Content-Type": "application/json",
-      "set-cookie": `token=${JSON.stringify(parsedData.data)}`,
     },
     status: response.status,
   };
-  console.log(parsedData);
+
   return NextResponse.json(parsedData, resultObject);
 };
 

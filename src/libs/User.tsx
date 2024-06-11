@@ -5,7 +5,7 @@ const getMe = async () => {
   const response = await fetch(`${apiUrl}/api/users`);
   console.log(response);
   if (!response.ok) {
-    throw new Error("Failed to get user details");
+    throw new Error("Failed to get user profile");
   }
 
   const { data } = await response.json();

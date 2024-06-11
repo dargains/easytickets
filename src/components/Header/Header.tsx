@@ -25,7 +25,7 @@ const Header = () => {
         {isAuth ? (
           <>
             <li>
-              <Link href="/details">detalhes</Link>
+              <Link href="/profile">perfil</Link>
             </li>
           </>
         ) : (

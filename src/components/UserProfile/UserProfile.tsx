@@ -27,7 +27,7 @@ const UserDetails = () => {
     if (!token) {
       router.push("/login");
     }
-
+    console.log(token);
     getMe().then((data) => {
       setUser(data);
     });

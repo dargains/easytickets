@@ -46,7 +46,7 @@ const SignupForm = () => {
         <label htmlFor="first_name">Primeiro nome</label>
         <input
           type="text"
-          id="name"
+          id="first_name"
           name="first_name"
           value={formData.first_name}
           onChange={onChange}
@@ -56,7 +56,7 @@ const SignupForm = () => {
         <label htmlFor="last_name">Último nome</label>
         <input
           type="text"
-          id="name"
+          id="last_name"
           name="last_name"
           value={formData.last_name}
           onChange={onChange}
@@ -66,7 +66,7 @@ const SignupForm = () => {
         <label htmlFor="email">Email</label>
         <input
           type="email"
-          id="name"
+          id="email"
           name="email"
           value={formData.email}
           onChange={onChange}

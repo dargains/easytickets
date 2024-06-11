@@ -27,12 +27,12 @@ const LoginForm = () => {
 
   const onSubmit = async (user: User) => {
     await loginUser(user);
-    router.push("/details");
+    router.push("/profile");
   };
 
   useEffect(() => {
     if (Cookies.get("token")) {
-      router.push("/details");
+      router.push("/profile");
     }
   }, []);
 
