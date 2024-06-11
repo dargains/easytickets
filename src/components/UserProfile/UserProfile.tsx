@@ -1,31 +1,14 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-import Cookies from "js-cookie";
+import { redirect } from "next/navigation";
 
 import { cmsUrl } from "@/helpers/functions";
 import { User } from "@/types";
-import { getMe } from "@/libs/User";
+import { getMe, logoutUser } from "@/libs/User";
 
-const UserDetails = () => {
-  const router = useRouter();
-  // const { token, setToken } = useAppContext();
-  const [user, setUser] = useState<User | undefined>(undefined);
-
-  const onLogout = () => {
-    router.push("/");
-    Cookies.remove("token");
-  };
-
-  useEffect(() => {
-    getMe().then((data) => {
-      setUser(data);
-    });
-  }, []);
+const UserDetails = async () => {
+  const user: User = await getMe();
 
   return (
     <div>
@@ -39,7 +22,15 @@ const UserDetails = () => {
             width={200}
             height={200}
           />
-          <button onClick={onLogout}>Logout</button>
+          <form
+            action={async () => {
+              "use server";
+              await logoutUser();
+              redirect("/");
+            }}
+          >
+            <button type="submit">Logout</button>
+          </form>
         </div>
       ) : (
         <p>a carregar...</p>

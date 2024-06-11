@@ -1,7 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
+import { redirect } from "next/navigation";
 
 import { User } from "@/types";
 import { loginUser } from "@/libs/User";
@@ -12,31 +10,21 @@ const initialUserState: User = {
 };
 
 const LoginForm = () => {
-  const router = useRouter();
-  const [formData, setFormData] = useState<User>(initialUserState);
-
-  const onChange = ({ target }: { target: HTMLInputElement }) =>
-    setFormData({ ...formData, [target.name]: target.value });
-
-  const handleSubmit = () => {
-    onSubmit(formData);
-  };
-
-  const onSubmit = async (user: User) => {
-    await loginUser(user);
-    router.push("/profile");
-  };
-
   return (
-    <div>
+    <form
+      action={async (formData) => {
+        "use server";
+        await loginUser(formData);
+        redirect("/profile");
+      }}
+    >
       <div>
         <label htmlFor="email">Email</label>
         <input
           type="email"
           id="name"
           name="email"
-          value={formData.email}
-          onChange={onChange}
+          defaultValue={initialUserState.email}
         />
       </div>
       <div>
@@ -45,12 +33,11 @@ const LoginForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
-          onChange={onChange}
+          defaultValue={initialUserState.password}
         />
       </div>
-      <button onClick={handleSubmit}>login</button>
-    </div>
+      <button type="submit">login</button>
+    </form>
   );
 };
 

@@ -1,23 +1,21 @@
 import { cache, cmsUrl } from "@/helpers/functions";
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 const GET = async (req: NextRequest) => {
-  const headers = new Headers();
+  const auth = req.headers.get("Authorization");
 
-  const cookie = req.cookies.get("token")?.value;
-
-  if (!cookie) {
+  if (!auth) {
     return NextResponse.json(false, {
       status: 403,
     });
   }
 
-  const { access_token } = JSON.parse(cookie);
-  headers.set("cache", cache);
-  headers.set("Authorization", `Bearer ${access_token}`);
-
-  const response = await fetch(`${cmsUrl}/users/me`, { headers });
+  const response = await fetch(`${cmsUrl}/users/me`, {
+    headers: {
+      cache,
+      Authorization: auth,
+    },
+  });
   const parsedData = await response.json();
 
   return NextResponse.json(parsedData);

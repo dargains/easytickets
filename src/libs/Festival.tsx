@@ -2,15 +2,18 @@ import { apiUrl } from "@/helpers/functions";
 import { notFound } from "next/navigation";
 
 const getFestivals = async () => {
-  const response = await fetch(`${apiUrl}/api/festivals`, { cache: "no-cache" });
+  const response = await fetch(`${apiUrl}/api/festivals`, {
+    cache: "no-cache",
+  });
   const { data } = await response.json();
   return data;
-}
+};
 
 const getFestivalDetails = async (festivalId: string) => {
-  const response = await fetch(`${apiUrl}/api/festivals/${festivalId}`, { cache: "no-cache" });
+  const response = await fetch(`${apiUrl}/api/festivals/${festivalId}`, {
+    cache: "no-cache",
+  });
   if (!response.ok) {
-    console.log('response', response)
     notFound();
   }
   const { data } = await response.json();
@@ -18,4 +21,4 @@ const getFestivalDetails = async (festivalId: string) => {
   return data;
 };
 
-export { getFestivals, getFestivalDetails }
+export { getFestivals, getFestivalDetails };
