@@ -14,9 +14,11 @@ const POST = async (req: any) => {
   const resultObject = {
     headers: {
       "Content-Type": "application/json",
+      "set-cookie": `token=${JSON.stringify(parsedData.data)}`,
     },
     status: response.status,
   };
+  console.log(parsedData);
   return NextResponse.json(parsedData, resultObject);
 };
 

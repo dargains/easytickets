@@ -14,33 +14,24 @@ import { getMe } from "@/libs/User";
 
 const UserDetails = () => {
   const router = useRouter();
-  const { token, setToken } = useAppContext();
+  // const { token, setToken } = useAppContext();
   const [user, setUser] = useState<User | undefined>(undefined);
 
   const onLogout = () => {
     router.push("/");
     Cookies.remove("token");
-    setToken(undefined);
   };
 
   useEffect(() => {
+    const token = Cookies.get("token");
     if (!token) {
-      const newToken = Cookies.get("token");
-      if (!newToken) {
-        router.push("/login");
-      } else {
-        setToken(JSON.parse(newToken));
-      }
+      router.push("/login");
     }
-  }, []);
 
-  useEffect(() => {
-    if (!token) return;
-    getMe(token.access_token).then((data) => {
+    getMe().then((data) => {
       setUser(data);
-      Cookies.set("user", JSON.stringify(data));
     });
-  }, [token]);
+  }, []);
 
   return (
     <div>

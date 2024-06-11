@@ -1,15 +1,17 @@
 import { apiUrl } from "@/helpers/functions";
 import { User } from "@/types";
 
-const getMe = async (token: string) => {
-  const url = `${apiUrl}/api/users?token=${token}`;
-  const response = await fetch(url);
+const getMe = async () => {
+  const response = await fetch(`${apiUrl}/api/users`);
+  console.log(response);
   if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to get user details");
   }
+
   const { data } = await response.json();
+
   return data;
-}
+};
 
 const createUser = async (params: User) => {
   return await fetch(`/api/users`, {
@@ -19,7 +21,7 @@ const createUser = async (params: User) => {
     },
     body: JSON.stringify(params),
   });
-}
+};
 
 const loginUser = async (params: User) => {
   const response = await fetch(`/api/auth`, {
@@ -35,6 +37,6 @@ const loginUser = async (params: User) => {
   }
   const { data } = await response.json();
   return data;
-}
+};
 
 export { getMe, createUser, loginUser };

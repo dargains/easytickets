@@ -16,7 +16,6 @@ const initialUserState: User = {
 
 const LoginForm = () => {
   const router = useRouter();
-  const { token, setToken } = useAppContext();
   const [formData, setFormData] = useState<User>(initialUserState);
 
   const onChange = ({ target }: { target: HTMLInputElement }) =>
@@ -27,22 +26,13 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (user: User) => {
-    const response = await loginUser(user);
-    Cookies.set("token", JSON.stringify(response), {
-      expires: response.expires / 86400000,
-    });
-    setToken(response);
+    await loginUser(user);
     router.push("/details");
   };
 
   useEffect(() => {
-    if (token) {
+    if (Cookies.get("token")) {
       router.push("/details");
-    } else {
-      const newToken = Cookies.get("token");
-      if (newToken) {
-        router.push("/details");
-      }
     }
   }, []);
 
