@@ -9,7 +9,6 @@ import Cookies from "js-cookie";
 
 import { cmsUrl } from "@/helpers/functions";
 import { User } from "@/types";
-import { useAppContext } from "@/context";
 import { getMe } from "@/libs/User";
 
 const UserDetails = () => {
@@ -23,11 +22,6 @@ const UserDetails = () => {
   };
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (!token) {
-      router.push("/login");
-    }
-    console.log(token);
     getMe().then((data) => {
       setUser(data);
     });

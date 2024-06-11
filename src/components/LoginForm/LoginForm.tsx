@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Cookies from "js-cookie";
-
 import { User } from "@/types";
-import { useAppContext } from "@/context";
 import { loginUser } from "@/libs/User";
 
 const initialUserState: User = {
@@ -29,12 +26,6 @@ const LoginForm = () => {
     await loginUser(user);
     router.push("/profile");
   };
-
-  useEffect(() => {
-    if (Cookies.get("token")) {
-      router.push("/profile");
-    }
-  }, []);
 
   return (
     <div>
