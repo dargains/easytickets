@@ -27,7 +27,7 @@ const UserDetails = () => {
     if (!token) {
       const newToken = Cookies.get("token");
       if (!newToken) {
-        router.push("/user/login");
+        router.push("/login");
       } else {
         setToken(JSON.parse(newToken));
       }

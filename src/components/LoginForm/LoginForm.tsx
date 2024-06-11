@@ -32,16 +32,16 @@ const LoginForm = () => {
       expires: response.expires / 86400000,
     });
     setToken(response);
-    router.push("/user/details");
+    router.push("/details");
   };
 
   useEffect(() => {
     if (token) {
-      router.push("/user/details");
+      router.push("/details");
     } else {
       const newToken = Cookies.get("token");
       if (newToken) {
-        router.push("/user/details");
+        router.push("/details");
       }
     }
   }, []);
