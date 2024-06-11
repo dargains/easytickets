@@ -1,46 +1,17 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
+import React from "react";
+import LoginForm from "@/components/LoginForm/LoginForm";
 import { User } from "@/types";
-import { useAppContext } from "@/context";
-import LoginForm from "@/components/LoginForm";
-import { loginUser } from "@/libs/User";
+import { Metadata } from "next";
 
-const initialUserState: User = {
-  email: "another3@example.com",
-  password: "d1r3ctu5",
+export const metadata: Metadata = {
+  title: "Login",
 };
 
 const UserLoginPage = () => {
-  const router = useRouter();
-  const { token, setToken } = useAppContext();
-
-  const onSubmit = async (user: User) => {
-    const response = await loginUser(user);
-    Cookies.set("token", JSON.stringify(response), {
-      expires: response.expires / 86400000,
-    });
-    setToken(response);
-    router.push("/user/details");
-  };
-
-  useEffect(() => {
-    if (token) {
-      router.push("/user/details");
-    } else {
-      const newToken = Cookies.get("token");
-      if (newToken) {
-        router.push("/user/details");
-      }
-    }
-  }, []);
-
   return (
     <section>
-      <h1>registo</h1>
-      <LoginForm initialUserState={initialUserState} onSubmit={onSubmit} />
+      <h1>Login</h1>
+      <LoginForm />
     </section>
   );
 };

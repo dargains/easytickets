@@ -1,15 +1,37 @@
 "use client";
 
 import React, { useState } from "react";
+
 import { User } from "@/types";
+import { createUser } from "@/libs/User";
 
 type Props = {
   initialUserState: User;
-  onSubmit: (user: User) => void;
 };
 
-const SignupForm = ({ initialUserState, onSubmit }: Props) => {
+const initialUserState: User = {
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
+  role: "b110cd8b-96ad-40c9-a828-76a31c97772b",
+};
+
+const SignupForm = () => {
+  const [hasError, setHasError] = useState(false);
   const [formData, setFormData] = useState<User>(initialUserState);
+
+  const onSubmit = async (userInfo: User) => {
+    setHasError(false);
+    const response = await createUser(userInfo);
+    if (!response.ok) {
+      const responseText = await response.text();
+      setHasError(true);
+      throw new Error(responseText);
+    }
+    const { data } = await response.json();
+    return data;
+  };
 
   const onChange = ({ target }: { target: HTMLInputElement }) =>
     setFormData({ ...formData, [target.name]: target.value });
@@ -61,6 +83,8 @@ const SignupForm = ({ initialUserState, onSubmit }: Props) => {
         />
       </div>
       <button onClick={handleSubmit}>registar</button>
+
+      {hasError ? <p>ocorreu um erro</p> : ""}
     </div>
   );
 };

@@ -8,7 +8,10 @@ import Header from "@/components/Header/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Easytickets",
+  title: {
+    default: "EasyTickets",
+    template: "%s | EasyTickets",
+  },
   description: "O Tinder dos Festivais 😂",
 };
 

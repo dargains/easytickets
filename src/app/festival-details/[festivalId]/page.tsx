@@ -4,13 +4,19 @@ import { Festival } from "@/types";
 import { getFestivalDetails } from "@/libs/Festival";
 import FestivalDetails from "@/components/FestivalDetails/FestivalDetails";
 
-const FestivalDetailsPage = async ({
-  params: { festivalId },
-}: {
-  params: { festivalId: string };
-}) => {
+export const metadata = {
+  title: "Detalhes do Festival",
+};
+
+type Props = {
+  params: {
+    festivalId: string;
+  };
+};
+
+const FestivalDetailsPage = async ({ params: { festivalId } }: Props) => {
   const festival: Festival = await getFestivalDetails(festivalId);
-  const hasGoers = !!festival?.goers?.length
+  const hasGoers = !!festival?.goers?.length;
 
   return (
     <section>
