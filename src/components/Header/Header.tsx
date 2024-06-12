@@ -1,20 +1,10 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import Cookies from "js-cookie";
 import styles from "./Header.module.css";
+import { cookies } from "next/headers";
 
-const Header = () => {
-  const [isAuth, setisAuth] = useState(false);
-
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      setisAuth(true);
-    }
-  }, []);
-
+const Header = async () => {
+  const isAuth = cookies().get("token")?.value;
   return (
     <header className={styles.container}>
       <h1>
